@@ -1,0 +1,99 @@
+[comment encoding = UTF-8]
+[module generate('http://main/mde/version_model2text')]
+[import main::acceleo::main::System]
+
+[template public generateSystem(s : System] 
+[comment @main/]
+
+[file ('articles.html', false)]
+
+
+<!-- Deberia generarse dentro del template-->
+<!doctype html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Title</title>
+    <meta name="author" content="Author">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="HandheldFriendly" content="true">
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1">
+    <meta property="og:site_name" content="Author's website">
+    <meta property="og:title" content="Author's website" />
+    <meta property="og:description" content="Author's website" />
+    <meta property="og:image" itemprop="image" content="images/main.png">
+    <meta property="og:type" content="website" />
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Simonetta:400,900|Balthazar">
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <link rel="stylesheet" type="text/css" href="responsive.css">
+    <link rel="icon" type="image/png" href="images/favicon.png" />
+    <meta name="twitter:widgets:theme" content="dark">
+    <meta name="twitter:widgets:link-color" content="#5582d6">
+    <meta name="twitter:widgets:border-color" content="#5582d6">
+    <meta name="twitter:widgets:csp" content="on">
+    <meta name="twitter:widgets:autoload" content="off">
+</head>
+
+<body>
+
+
+    <div id="content-desktop">
+    <div id="w" itemscope itemtype="http://schema.org/Person">
+    <div id="s" itemscope itemtype="http://schema.org/Person"></div>
+    <div id="h" itemscope itemtype="http://schema.org/Person" style="width: 100%;">
+        <header class="clearfix">
+            <div id="info" style="vertical-align: top; text-align: left;">
+                <span id='badgeCont311562' style='width:126px; float: right; text-align: right; vertical-align: top;'>
+                <h1>
+                <span itemprop="name" style='text-align: left; vertical-align: bottom;'>[aAuthor.name /]</span>
+                </h1>
+                </div>
+                <div style="width: 100%; text-align: left;">
+                <h3><span itemprop="jobTitle">[aAuthor.jobTitle /], <a href="mailto:[aAuthor.mail]">[aAuthor.mail /]</a></span>
+                </h3>
+                </div>
+                <small>
+                <div style="width: 100%;">
+                <div style="text-align: left;">
+
+[for (s: SocialMedia | aAuthor.socials)]
+                <a href="[s.url /]" itemprop="url" target="_blank"><img style="vertical-align:middle" src="images/scholar.ico" width="18" height="18" alt="[s.Name /]"/></a><span style="vertical-align: top;">&nbsp;</span>
+[/for]
+                </div>
+                </div>
+                </small>
+            </div>
+            <div id="photo" style="vertical-align: top; text-align: right;">
+                <a href="[aAuthor.resume /]" itemprop="url"><img src="[aAuthor.picture /]" width="134px" height="160px" alt="resume photo avatar" itemprop="image" /></a><br />
+                <p itemprop="description" style="text-align: right;"><a href="https://www.gomezabajo.es/recoms" itemprop="url">Recommendations</a></p>
+            </div>
+        <nav class="navigate">
+            <ul class="menu">
+                <li class="menu active"><a href="#profile">Profile</a></li>     <!-- Linkear a profile? Linkear a o.item[0]-->
+[for (o: Menu | aSystem.menuItems)]
+               <li class="menu"><a href="#[o.item /]">[o.item /]</a></li>
+[/for]
+
+            </ul>
+        </nav>
+        </header>
+    </div>
+
+    <div id="b" itemscope itemtype="http://schema.org/Person">
+        <section id="profile">
+            <h2>My History &amp; Profile</h2>
+            <p itemprop="description" style="text-align: justify; text-justify: inter-word;"> <!-- Tipo de artículo (texto)-->
+            ...
+            </p>
+        </section>
+
+<!-- Tipo de artículo (lista)
+        <section id="[o.item /]">
+        <section id="[o.item /]" class="clearfix" itemscope itemtype="http://schema.org/ItemList">
+-->
+
+[for (o: Menu | aSystem.menuItems)]
+        <section id="[o.item /]">
+        [o.text /] <!-- Expandir -->
+        </section>
+[/for]
